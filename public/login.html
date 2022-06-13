@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>登录</title>
+</head>
+<body>
+    <form id="loginForm">
+        <div>
+            <label for="">用户名：</label><input type="text" name="name">
+        </div>
+        <div>
+            <label for="">密码：</label><input type="password" name="password">
+        </div>
+        <div>
+            <button type="submit">登录</button>
+        </div>
+    </form>
+</body>
+<script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js" type="application/javascript"></script>
+<script>
+    let $form = $('#loginForm')
+    $form.on('submit',(e)=>{
+        // 阻止默认事件
+        e.preventDefault();
+        const name = $form.find('input[name="name"]').val();
+        const password = $form.find('input[name="password"]').val();
+        console.log(name,password);
+        $.ajax({
+            url:'/login',
+            method:'post',
+            // 设置contentType
+            contentType:'text/json;charset=UFT-8',
+            data:JSON.stringify({name,password})
+        }).then(()=>{
+            alert('登录成功！')
+            window.location.href = '/home.html'
+        },()=>{
+
+        })
+    })
+</script>
+</html>
